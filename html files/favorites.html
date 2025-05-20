@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites</title>
+    <link rel="stylesheet" href="../css files/favourites.css">
+    <script type="module" src="../javascript files/fav-display.js" defer></script>
+</head>
+<body>
+    <header>
+        <div id="head-part1">
+            <nav><a href="./index.html">Home</a></nav>
+            <nav><a href="">Favorites</a></nav>
+        </div>
+        <div id="head-part2">
+            <input type="text" 
+            placeholder="Search anime..."
+            class="input-here"
+            required>
+            <button class="search-button">Search</button>
+        </div>
+    </header>
+
+    <div id="favorites-container" class="anime-container"></div>
+    <div class="loading-spinner" style="display: none;">
+        <div class="spin"></div>
+        <p>Loadin...</p>
+    </div>
+</body>
+</html>
