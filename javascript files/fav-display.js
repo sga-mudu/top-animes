@@ -1,4 +1,4 @@
-import { getAllFavorites, removeFromFavorites, checkIfLiked } from './favorites.js';
+import { getAllFavorites, removeFromFavorites } from '../javascript files/favorites.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     displayFavorites();

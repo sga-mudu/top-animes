@@ -1,6 +1,6 @@
-import { getAnimeDetails } from "./api.js";
-import { addToFavorites, checkIfLiked, removeFromFavorites } from "./favorites.js";
-import { getAnimeCardStructure } from "./structures.js";
+import { getAnimeDetails } from "../javascript files/api.js";
+import { addToFavorites, checkIfLiked, removeFromFavorites } from "../javascript files/favorites.js";
+import { getAnimeCardStructure } from "../javascript files/structures.js";
 
 const animeID = new URLSearchParams(window.location.search).get("id");
 const detailsContainer = document.querySelector(".details-container");

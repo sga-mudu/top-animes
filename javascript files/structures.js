@@ -1,4 +1,4 @@
-import { checkIfLiked } from "./favorites.js";
+import { checkIfLiked } from "../javascript files/favorites.js";
 
 export const getAnimeCardStructure = (anime) => {
     const detailsContainer = document.querySelector(".details-container");

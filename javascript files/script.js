@@ -1,5 +1,5 @@
-import { apiBase, fetchData } from "./api.js";
-import { checkIfLiked, addToFavorites, removeFromFavorites } from "./favorites.js";
+import { apiBase, fetchData } from "../javascript files/api.js";
+import { checkIfLiked, addToFavorites, removeFromFavorites } from "../javascript files/favorites.js";
 
 
 const loadingSpinner = document.querySelector(".loading-spinner");
