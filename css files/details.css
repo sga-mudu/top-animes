@@ -152,3 +152,16 @@ body{
         font-size: 30px;
     }
 }
+
+@media (min-width: 900px){
+    .header-section .like-btn{
+        position: absolute;
+        right: 250px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        height: 60px;
+        width: 60px;
+        transition: transform 0.3s ease;
+    }
+}
