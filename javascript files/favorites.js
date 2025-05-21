@@ -1,3 +1,4 @@
+
 // favorites.js
 export function checkIfLiked(animeId) {
     const likedAnime = JSON.parse(localStorage.getItem("likedAnime") || "{}");

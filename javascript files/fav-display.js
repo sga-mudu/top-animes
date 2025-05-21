@@ -1,3 +1,4 @@
+
 import { getAllFavorites, removeFromFavorites } from '../javascript files/favorites.js';
 
 document.addEventListener("DOMContentLoaded", () => {

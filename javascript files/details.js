@@ -1,3 +1,4 @@
+
 import { getAnimeDetails } from "../javascript files/api.js";
 import { addToFavorites, checkIfLiked, removeFromFavorites } from "../javascript files/favorites.js";
 import { getAnimeCardStructure } from "../javascript files/structures.js";

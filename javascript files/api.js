@@ -1,4 +1,4 @@
-import { showLoading, hideLoading } from "script.js";
+import { showLoading, hideLoading } from "../javascript files/script.js";
 
 export const apiBase = "https://api.jikan.moe/v4";
 
