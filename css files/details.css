@@ -153,7 +153,7 @@ body{
     }
 }
 
-@media (min-width: 900px){
+@media (min-width: 1028px){
     .header-section .like-btn{
         position: absolute;
         right: 250px;
