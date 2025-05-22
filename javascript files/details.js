@@ -34,12 +34,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             
             detailsLikeBtn.addEventListener("click", buttonClicked);
 
-            if (isLiked) {
-                addToFavorites(anime);
-        
-            } else {
-                removeFromFavorites(animeID);
-            }
+            // if(isLiked){
+            //     addToFavorites(anime);
+            // } else{
+            //     removeFromFavorites(anime.mal_id);
+            // }
         }
         backButton();
     } catch(error){
