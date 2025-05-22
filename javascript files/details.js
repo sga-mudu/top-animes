@@ -71,6 +71,7 @@ export function backButton(){
     const backBtn = document.querySelector(".back-btn");
     if(backBtn){
         backBtn.addEventListener("click", ()=>{
+            location.reload();
             window.history.back();
         });
     }
