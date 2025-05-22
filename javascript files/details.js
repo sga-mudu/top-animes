@@ -72,9 +72,7 @@ export function backButton(){
     const backBtn = document.querySelector(".back-btn");
     if(backBtn){
         backBtn.addEventListener("click", ()=>{
-            // window.location.reload();
-            setTimeout(() => location.reload(), 100);
-            window.history.back();
+            window.location.href = "../index.html";
         });
     }
 }
