@@ -64,6 +64,7 @@ function buttonClicked(e) {
         } else {
             removeFromFavorites(anime.mal_id);
         }
+        setTimeout(() => location.reload(), 100);
     }
 }
 
@@ -71,7 +72,7 @@ export function backButton(){
     const backBtn = document.querySelector(".back-btn");
     if(backBtn){
         backBtn.addEventListener("click", ()=>{
-            window.location.reload();
+            // window.location.reload();
             window.history.back();
         });
     }
