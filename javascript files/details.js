@@ -5,7 +5,6 @@ import { getAnimeCardStructure } from "../javascript files/structures.js";
 
 const animeID = new URLSearchParams(window.location.search).get("id");
 const detailsContainer = document.querySelector(".details-container");
-const detailsLikeBtn = document.querySelector(".like-btn");
 let anime = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -34,6 +33,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             `;
             
             detailsLikeBtn.addEventListener("click", buttonClicked);
+
+            if (isLiked) {
+                addToFavorites(anime);
+        
+            } else {
+                removeFromFavorites(animeID);
+            }
         }
         backButton();
     } catch(error){
