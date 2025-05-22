@@ -30,14 +30,3 @@ export function getAllFavorites() {
         anime && typeof anime === 'object' && anime.mal_id
     );
 }
-// Add this to your favorites.js
-// export function showToast(message) {
-//     const toast = document.createElement("div");
-//     toast.className = "toast";
-//     toast.textContent = message;
-//     document.body.appendChild(toast);
-    
-//     setTimeout(() => {
-//         toast.remove();
-//     }, 3000);
-// }

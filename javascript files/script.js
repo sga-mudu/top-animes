@@ -167,8 +167,7 @@ function likeBut(e) {
     
     // Update path to match actual deployment structure
     likeBtn.innerHTML = `
-        <img src="${isActive ? 'icons/heart-full.svg' : 'icons/heart-outline.svg'}" 
-             alt="${isActive ? 'Unlike' : 'Like'}">
+        <img src="${isActive ? 'icons/heart-full.svg' : 'icons/heart-outline.svg'}" >
     `;
         
     // Get the anime data from the card
