@@ -5,9 +5,37 @@ import { checkIfLiked, addToFavorites, removeFromFavorites } from "../javascript
 const loadingSpinner = document.querySelector(".loading-spinner");
 
 document.addEventListener("DOMContentLoaded", () => {
-    const searchBtn = document.querySelector(".search-button");
-    const inputField = document.querySelector(".input-here");
+    const getElement = (selector, isId = false) => {
+        const el = isId 
+            ? document.getElementById(selector)
+            : document.querySelector(selector);
+        if (!el) console.error(`${isId ? 'ID' : 'Element'} "${selector}" not found`);
+        return el;
+    };
 
+    const searchBtn = getElement('.search-button');
+    const inputField = getElement('.input-here');
+    const animeContainer = getElement('anime-container', true);
+    const loadingSpinner = getElement('.loading-spinner');
+
+    // If any critical elements are missing, show error and stop
+    if (!searchBtn || !inputField || !animeContainer || !loadingSpinner) {
+        if (animeContainer) {
+            animeContainer.innerHTML = `
+                <div class="error">
+                    <h3>Page Loading Error</h3>
+                    <p>Required elements missing. Please check:</p>
+                    <ul>
+                        ${!searchBtn ? '<li>Search button (.search-button)</li>' : ''}
+                        ${!inputField ? '<li>Input field (.input-here)</li>' : ''}
+                        ${!animeContainer ? '<li>Anime container (#anime-container)</li>' : ''}
+                    </ul>
+                    <button onclick="window.location.reload()">Refresh Page</button>
+                </div>
+            `;
+        }
+        return;
+    }
 
     let debounceTimer;
 
@@ -40,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
             showLoading();
             try {
                 const searchResults = await fetchData(`${apiBase}/anime?q=${encodeURIComponent(query)}`);
-                const animeContainer = document.getElementById("anime-container");
                 animeContainer.innerHTML = "";
 
                 if (searchResults.data?.length > 0) {
@@ -71,9 +98,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Set up event listeners
-    document.addEventListener("click", likeBut);
-    searchBtn.addEventListener("click", searchBut);
-    inputField.addEventListener("input", preventApiSpam);
+    function setupEventListeners() {
+        // Use event delegation for like buttons
+        document.addEventListener("click", (e) => {
+            if (e.target.closest(".like-btn")) {
+                likeBut(e);
+            }
+        });
+
+        searchBtn.addEventListener("click", searchBut);
+        inputField.addEventListener("input", preventApiSpam);
+    }
+
+    setupEventListeners();
 
     // Initial data load
     getInfo();
@@ -111,51 +148,58 @@ function displayAnimeCards(anime, isLiked = false) {
     `;
 
     div.querySelector(".details")?.addEventListener("click", () => {
-        window.location.href = `./html files/details.html?id=${anime.mal_id}`;
+        // Update path to match actual deployment structure
+        window.location.href = `details.html?id=${anime.mal_id}`;
     });
 
     cardContainer.appendChild(div);
 }
 
 function likeBut(e) {
-    if (e.target.closest(".like-btn")) {
-        const likeBtn = e.target.closest(".like-btn");
-        const card = likeBtn.closest(".card");
-        const animeId = card?.dataset.id;
-        
-        if (!animeId) return;
-        
-        const isActive = !likeBtn.classList.contains("active");
-        likeBtn.classList.toggle("active", isActive);
-        
-        likeBtn.innerHTML = `
-            <img src="${isActive ? '../icons/heart-full.svg' : '../icons/heart-outline.svg'}" alt="">
-        `;
-        
-        // Get the anime data from the card
-        const anime = {
-            mal_id: animeId,
-            title: card.querySelector("h4")?.textContent,
-            images: {
-                jpg: {
-                    image_url: card.querySelector("img.main-picture")?.src
-                }
-            },
-            score: card.querySelector(".details span")?.textContent.replace("Rating: ", ""),
-            episodes: card.querySelector(".details span:nth-child(3)")?.textContent.replace("Episodes: ", ""),
-            synopsis: card.querySelector(".details p")?.textContent
-        };
+    const likeBtn = e.target.closest(".like-btn");
+    if (!likeBtn) return;
 
+    const card = likeBtn.closest(".card");
+    const animeId = card?.dataset.id;
+    if (!animeId) return;
+
+    const isActive = !likeBtn.classList.contains("active");
+    likeBtn.classList.toggle("active", isActive);
+    
+    // Update path to match actual deployment structure
+    likeBtn.innerHTML = `
+        <img src="${isActive ? 'icons/heart-full.svg' : 'icons/heart-outline.svg'}" 
+             alt="${isActive ? 'Unlike' : 'Like'}">
+    `;
         
-        
-        if (isActive) {
-            addToFavorites(anime);
-            // console.log(anime, "here is ")
-        } else {
-            removeFromFavorites(animeId);
-        }
+    // Get the anime data from the card
+    const anime = {
+        mal_id: animeId,
+        title: card.querySelector("h4")?.textContent,
+        images: {
+            jpg: {
+                image_url: card.querySelector("img.main-picture")?.src
+            }
+        },
+        score: card.querySelector(".details span")?.textContent.replace("Rating: ", ""),
+        episodes: card.querySelector(".details span:nth-child(3)")?.textContent.replace("Episodes: ", ""),
+        synopsis: card.querySelector(".details p")?.textContent
+    };
+
+    
+    
+    if (isActive) {
+        addToFavorites(anime);
+        // console.log(anime, "here is ")
+    } else {
+        removeFromFavorites(animeId);
     }
+    
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.addEventListener('click', likeBut);
+});
 
 // EXPORT THEM
 export { displayAnimeCards, likeBut };
