@@ -148,8 +148,7 @@ function displayAnimeCards(anime, isLiked = false) {
     `;
 
     div.querySelector(".details")?.addEventListener("click", () => {
-        // Update path to match actual deployment structure
-        window.location.href = `details.html?id=${anime.mal_id}`;
+        window.location.href = `./html files/details.html?id=${anime.mal_id}`;
     });
 
     cardContainer.appendChild(div);
