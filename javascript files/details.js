@@ -73,6 +73,7 @@ export function backButton(){
     if(backBtn){
         backBtn.addEventListener("click", ()=>{
             // window.location.reload();
+            setTimeout(() => location.reload(), 100);
             window.history.back();
         });
     }
