@@ -142,7 +142,7 @@ function displayAnimeCards(anime, isLiked = false) {
                 <p>${anime.synopsis || 'No synopsis available.'}</p>
             </div>
             <button class="like-btn ${isLiked ? 'active' : ''}">
-                <img src="${isLiked ? '../icons/heart-full.svg' : '../icons/heart-outline.svg'}" alt="">
+                <img src="${isLiked ? 'icons/heart-full.svg' : 'icons/heart-outline.svg'}" alt="">
             </button>
         </div>
     `;
