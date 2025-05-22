@@ -142,7 +142,7 @@ function displayAnimeCards(anime, isLiked = false) {
                 <p>${anime.synopsis || 'No synopsis available.'}</p>
             </div>
             <button class="like-btn ${isLiked ? 'active' : ''}">
-                <img src="${isLiked ? 'icons/heart-full.svg' : 'icons/heart-outline.svg'}" alt="">
+                <img src="${isLiked ? '../icons/heart-full.svg' : '../icons/heart-outline.svg'}" alt="">
             </button>
         </div>
     `;
@@ -167,7 +167,7 @@ function likeBut(e) {
     
     // Update path to match actual deployment structure
     likeBtn.innerHTML = `
-        <img src="${isActive ? 'icons/heart-full.svg' : 'icons/heart-outline.svg'}" >
+        <img src="${isActive ? '../icons/heart-full.svg' : '../icons/heart-outline.svg'}" >
     `;
         
     // Get the anime data from the card
@@ -188,7 +188,7 @@ function likeBut(e) {
     
     if (isActive) {
         addToFavorites(anime);
-        // console.log(anime, "here is ")
+
     } else {
         removeFromFavorites(animeId);
     }

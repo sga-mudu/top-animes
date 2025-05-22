@@ -1,32 +1,48 @@
+// favorites.js - CORRECTED VERSION
+const FAVORITES_KEY = "likedAnime";
 
-// favorites.js
+// Helper function for safe storage access
+const getFavoritesStore = () => {
+  try {
+    return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || {};
+  } catch (error) {
+    console.error("Error parsing favorites:", error);
+    return {};
+  }
+};
+
 export function checkIfLiked(animeId) {
-    const likedAnime = JSON.parse(localStorage.getItem("likedAnime") || "{}");
-    return !!likedAnime[animeId];
+  const store = getFavoritesStore();
+  // Convert to string for consistent type comparison
+  return store.hasOwnProperty(String(animeId));
 }
 
-// favorites.js
 export function addToFavorites(anime) {
-    const likedAnime = JSON.parse(localStorage.getItem("likedAnime") || {});
-    
-    // Only store if we have a valid anime object with mal_id
-    if (anime && anime.mal_id) {
-        likedAnime[anime.mal_id] = anime;
-        localStorage.setItem("likedAnime", JSON.stringify(likedAnime));
-    }
+  if (!anime?.mal_id) {
+    console.error("Invalid anime object:", anime);
+    return;
+  }
+
+  const store = getFavoritesStore();
+  const stringId = String(anime.mal_id);
+  store[stringId] = anime;
+  
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(store));
 }
 
 export function removeFromFavorites(animeId) {
-    const likedAnime = JSON.parse(localStorage.getItem("likedAnime") || {});
-    delete likedAnime[animeId];
-    localStorage.setItem("likedAnime", JSON.stringify(likedAnime));
+  const store = getFavoritesStore();
+  const stringId = String(animeId);
+  
+  if (store.hasOwnProperty(stringId)) {
+    delete store[stringId];
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(store));
+  }
 }
 
 export function getAllFavorites() {
-    const likedAnime = JSON.parse(localStorage.getItem("likedAnime") || "{}");
-    
-    // Filter out invalid entries (false values, etc.)
-    return Object.values(likedAnime).filter(anime => 
-        anime && typeof anime === 'object' && anime.mal_id
-    );
+  const store = getFavoritesStore();
+  return Object.values(store).filter(anime => 
+    anime && typeof anime === 'object' && anime.mal_id
+  );
 }

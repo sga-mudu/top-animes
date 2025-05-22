@@ -50,7 +50,7 @@ function buttonClicked(e) {
     
     detailsLikeBtn.classList.toggle("active", isActive);
     detailsLikeBtn.innerHTML = `
-        <img src="${isActive ? 'icons/heart-full.svg' : 'icons/heart-outline.svg'}" alt="">
+        <img src="${isActive ? '../icons/heart-full.svg' : '../icons/heart-outline.svg'}" alt="">
     `;
     
     if (anime) {
